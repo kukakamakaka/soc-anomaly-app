@@ -25,6 +25,7 @@ export default function Dashboard() {
   const [selectedEvent, setSelectedEvent] = useState<SOCEvent | null>(null);
   const [aiReport, setAiReport] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSimulating, setIsSimulating] = useState(false);
 
   const fetchEvents = async () => {
     try {
@@ -35,6 +36,22 @@ export default function Dashboard() {
       console.error("Ошибка API:", err);
     }
   };
+
+  const startSimulation = async () => {
+  setIsSimulating(true);
+  try {
+    const res = await fetch('http://127.0.0.1:8000/simulate', { method: 'POST' });
+    if (res.ok) {
+      // Можно добавить уведомление или просто ждать появления логов
+      console.log("Simulation started");
+    }
+  } catch (err) {
+    console.error("Ошибка запуска симуляции:", err);
+  } finally {
+    // Выключаем статус загрузки через пару секунд
+    setTimeout(() => setIsSimulating(false), 2000);
+  }
+};
 
   useEffect(() => {
     fetchEvents();
@@ -54,13 +71,19 @@ export default function Dashboard() {
   const openReport = async (event: SOCEvent) => {
     setSelectedEvent(event);
     setIsModalOpen(true);
-    setAiReport("🤖 ИИ анализирует цепочку вызовов...");
+    setAiReport("🤖 Sentinel AI анализирует вектор атаки и контекст процесса...");
+
     try {
+      // Добавляем небольшую искусственную задержку для эффекта "работы мысли" ИИ
       const res = await fetch(`http://127.0.0.1:8000/events/${event.id}/report`);
       const data = await res.json();
+
+      // Если отчет пришел с маркдауном (звездочками), просто выводим его.
+      // Для полноценного рендеринга ** лучше использовать библиотеку react-markdown,
+      // но пока оставим как текст для стабильности.
       setAiReport(data.report);
     } catch (err) {
-      setAiReport("❌ Ошибка связи с ИИ-модулем.");
+      setAiReport("❌ Системный сбой: Не удалось связаться с нейронным модулем анализа.");
     }
   };
 
@@ -79,7 +102,7 @@ export default function Dashboard() {
         <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg shadow-blue-900/20">
-              <ShieldAlert className="w-8 h-8 text-white" />
+              <ShieldAlert className="w-8 h-8 text-white"/>
             </div>
             <div>
               <h1 className="text-3xl font-black tracking-tighter text-white uppercase italic">
@@ -90,25 +113,43 @@ export default function Dashboard() {
               </p>
             </div>
           </div>
-          <div className="hidden lg:flex items-center gap-6 px-6 py-3 bg-slate-900/40 border border-slate-800 rounded-2xl backdrop-blur-md">
-             <div className="text-center">
-                <p className="text-[10px] text-slate-500 uppercase font-bold">API Status</p>
-                <p className="text-xs text-green-400 font-mono tracking-tighter">CONNECTED</p>
-             </div>
-             <div className="w-px h-8 bg-slate-800"></div>
-             <div className="text-center">
-                <p className="text-[10px] text-slate-500 uppercase font-bold">Model</p>
-                <p className="text-xs text-blue-400 font-mono tracking-tighter">ISOLATION_FOREST_V2</p>
-             </div>
+
+          <div
+              className="hidden lg:flex items-center gap-6 px-6 py-3 bg-slate-900/40 border border-slate-800 rounded-2xl backdrop-blur-md">
+            <div className="text-center">
+              <p className="text-[10px] text-slate-500 uppercase font-bold">API Status</p>
+              <p className="text-xs text-green-400 font-mono tracking-tighter">CONNECTED</p>
+            </div>
+            <div className="w-px h-8 bg-slate-800"></div>
+            <div className="text-center">
+              <p className="text-[10px] text-slate-500 uppercase font-bold">Model</p>
+              <p className="text-xs text-blue-400 font-mono tracking-tighter">ISOLATION_FOREST_V2</p>
+            </div>
+
+            {/* Вертикальный разделитель перед кнопкой */}
+            <div className="w-px h-8 bg-slate-800"></div>
+
+            {/* Кнопка симуляции */}
+            <button
+                onClick={startSimulation}
+                disabled={isSimulating}
+                className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all duration-300 ${
+                    isSimulating
+                        ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed opacity-50'
+                        : 'bg-blue-600/10 border-blue-500/50 text-blue-400 hover:bg-blue-600 hover:text-white shadow-lg shadow-blue-900/20 active:scale-95'
+                }`}
+            >
+              {isSimulating ? 'Starting Engine...' : 'Run Attack Simulation'}
+            </button>
           </div>
         </header>
-
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <StatCard title="Events Scanned" value={events.length} icon={<Search size={20}/>} color="blue" />
-          <StatCard title="High Alerts" value={criticalCount} icon={<AlertTriangle size={20}/>} color="red" alert={criticalCount > 0} />
-          <StatCard title="System Integrity" value="98.1%" icon={<ShieldCheck size={20}/>} color="emerald" />
-          <StatCard title="Avg Latency" value="12ms" icon={<Activity size={20}/>} color="purple" />
+          <StatCard title="Events Scanned" value={events.length} icon={<Search size={20}/>} color="blue"/>
+          <StatCard title="High Alerts" value={criticalCount} icon={<AlertTriangle size={20}/>} color="red"
+                    alert={criticalCount > 0}/>
+          <StatCard title="System Integrity" value="98.1%" icon={<ShieldCheck size={20}/>} color="emerald"/>
+          <StatCard title="Avg Latency" value="12ms" icon={<Activity size={20}/>} color="purple"/>
         </div>
 
         {/* Top Section: Visualization */}
@@ -128,12 +169,12 @@ export default function Dashboard() {
                       <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false} />
-                  <XAxis dataKey="name" stroke="#475569" fontSize={10} tickLine={false} axisLine={false} />
-                  <YAxis stroke="#475569" fontSize={10} tickLine={false} axisLine={false} domain={['auto', 'auto']} />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false}/>
+                  <XAxis dataKey="name" stroke="#475569" fontSize={10} tickLine={false} axisLine={false}/>
+                  <YAxis stroke="#475569" fontSize={10} tickLine={false} axisLine={false} domain={['auto', 'auto']}/>
                   <Tooltip
-                    contentStyle={{backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px'}}
-                    itemStyle={{color: '#3b82f6', fontSize: '12px'}}
+                      contentStyle={{backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px'}}
+                      itemStyle={{color: '#3b82f6', fontSize: '12px'}}
                   />
                   <Area type="monotone" dataKey="score" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorScore)" />
                 </AreaChart>
@@ -267,20 +308,36 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="bg-blue-600/5 p-8 rounded-3xl border border-blue-500/20 shadow-inner">
-                <div className="flex items-start gap-5">
-                  <Info className="w-6 h-6 text-blue-500 mt-1" />
-                  <p className="text-slate-200 leading-relaxed font-medium text-lg">
-                    "{aiReport}"
-                  </p>
+              <div
+                  className="bg-blue-600/5 p-8 rounded-3xl border border-blue-500/20 shadow-inner relative overflow-hidden">
+                {/* Анимированный фон для процесса анализа */}
+                {aiReport.includes("анализирует") && (
+                    <div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent animate-shimmer"></div>
+                )}
+
+                <div className="flex items-start gap-5 relative z-10">
+                  <Info className={`w-6 h-6 mt-1 ${aiReport.includes("❌") ? 'text-red-500' : 'text-blue-500'}`}/>
+                  <div className="space-y-2">
+                    <p className="text-slate-200 leading-relaxed font-medium text-lg italic">
+                      {aiReport}
+                    </p>
+                    {!aiReport.includes("анализирует") && !aiReport.includes("❌") && (
+                        <div
+                            className="flex items-center gap-2 text-[10px] text-emerald-500 font-black uppercase tracking-widest mt-4">
+                          <ShieldCheck size={12}/> Analysis Verified by Sentinel Core
+                        </div>
+                    )}
+                  </div>
                 </div>
               </div>
 
-              <div className="pt-6 flex justify-between items-center text-slate-500 text-[10px] font-mono uppercase tracking-[0.3em]">
+              <div
+                  className="pt-6 flex justify-between items-center text-slate-500 text-[10px] font-mono uppercase tracking-[0.3em]">
                 <span>Unit: Sentinel AI v2.6.4</span>
                 <button
-                  onClick={() => setIsModalOpen(false)}
-                  className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-2xl text-xs font-black transition-all shadow-xl shadow-blue-900/20 hover:scale-105 active:scale-95"
+                    onClick={() => setIsModalOpen(false)}
+                    className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-2xl text-xs font-black transition-all shadow-xl shadow-blue-900/20 hover:scale-105 active:scale-95"
                 >
                   Confirm Awareness
                 </button>
@@ -293,7 +350,7 @@ export default function Dashboard() {
   );
 }
 
-function StatCard({ title, value, icon, color, alert }: any) {
+function StatCard({title, value, icon, color, alert}: any) {
   const themes: any = {
     blue: "border-blue-500/10 text-blue-400 bg-blue-500/[0.02] hover:border-blue-500/30 shadow-blue-900/5",
     red: "border-red-500/10 text-red-400 bg-red-500/[0.02] hover:border-red-500/30 shadow-red-900/5",

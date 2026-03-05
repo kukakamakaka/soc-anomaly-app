@@ -1,8 +1,11 @@
-from fastapi import FastAPI, Depends
+from fastapi import FastAPI, Depends, HTTPException
+from app.ai_engine import ai_analyst
 from sqlalchemy.orm import Session
 from app.database import SessionLocal, engine
 from app import models, schemas
 from app.anomaly_detector import AnomalyDetector
+import subprocess
+import os
 
 # Создаем таблицы в PostgreSQL (в Докере)
 models.Base.metadata.create_all(bind=engine)
@@ -121,3 +124,33 @@ def get_ai_report(event_id: int, db: Session = Depends(get_db)):
         report = "✅ **Анализ ИИ:** Поведение соответствует стандартным операциям системы. Аномалий не выявлено."
 
     return {"report": report}
+
+@app.get("/events/{event_id}/report")
+def get_event_report(event_id: int, db: Session = Depends(get_db)):
+    event = db.query(models.SOCEvent).filter(models.SOCEvent.id == event_id).first()
+    if not event:
+        raise HTTPException(status_code=404, detail="Event not found")
+
+    # Передаем данные в ИИ-движок
+    report_text = ai_analyst.analyze_event({
+        "process_name": event.process_name,
+        "command_line": event.command_line,
+        "user": event.user,
+        "severity": event.severity
+    })
+
+    return {"id": event_id, "report": report_text}
+
+
+@app.post("/simulate")
+async def run_simulation():
+    try:
+        # Указываем путь к скрипту (убедись, что путь верный относительно main.py)
+        script_path = os.path.join(os.path.dirname(__file__), "..", "generate_data.py")
+
+        # Запускаем скрипт в фоновом режиме
+        subprocess.Popen(["python3", script_path])
+
+        return {"status": "success", "message": "Симуляция атак запущена!"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Ошибка запуска: {str(e)}")
