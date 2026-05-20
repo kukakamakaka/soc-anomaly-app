@@ -3,7 +3,7 @@ from sqlalchemy.orm import sessionmaker, declarative_base
 
 # 1. Меняем URL: вместо sqlite используем postgresql
 # Формат: postgresql://логин:пароль@хост:порт/название_базы
-SQLALCHEMY_DATABASE_URL = "postgresql://user:password@localhost:5433/soc_db"
+SQLALCHEMY_DATABASE_URL = "postgresql://user:password@127.0.0.1:5433/soc_db"
 
 # 2. Создаем движок (engine).
 # Для Postgres параметр check_same_thread не нужен (это только фишка SQLite)

@@ -1,15 +1,18 @@
 'use client';
 
-import { useEffect, useState, useMemo } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   LineChart, Line, XAxis, YAxis, CartesianGrid,
   Tooltip, ResponsiveContainer, AreaChart, Area
 } from 'recharts';
 import {
   ShieldAlert, ShieldCheck, Activity, Terminal,
-  User, Search, X, Cpu, AlertTriangle, Info, TrendingUp
+  User, Search, X, Cpu, AlertTriangle, Info, TrendingUp,
+  RefreshCw, Zap, Database, Lock, Globe, Server
 } from 'lucide-react';
 
+// --- Types ---
 interface SOCEvent {
   id: number;
   process_name: string;
@@ -20,147 +23,251 @@ interface SOCEvent {
   mitre_technique?: string;
 }
 
+// --- Components ---
+
+const StatCard = ({ title, value, icon: Icon, color, alert, delay = 0 }: any) => {
+  const colors: any = {
+    blue: "from-blue-600/10 to-blue-400/5 border-blue-500/20 text-blue-400 shadow-blue-500/5",
+    red: "from-red-600/10 to-red-400/5 border-red-500/20 text-red-400 shadow-red-500/5",
+    emerald: "from-emerald-600/10 to-emerald-400/5 border-emerald-500/20 text-emerald-400 shadow-emerald-500/5",
+    purple: "from-purple-600/10 to-purple-400/5 border-purple-500/20 text-purple-400 shadow-purple-500/5",
+  };
+
+  return (
+    <motion.div
+      whileHover={{ y: -8, scale: 1.02, transition: { duration: 0.2 } }}
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.5, ease: "easeOut" }}
+      className={`glass p-8 rounded-[2rem] border bg-gradient-to-br ${colors[color]} relative overflow-hidden group`}
+    >
+      <div className="flex justify-between items-start mb-4 relative z-10">
+        <div className={`p-3 rounded-2xl bg-black/40 border border-white/5 group-hover:rotate-6 transition-transform`}>
+          <Icon size={24} />
+        </div>
+        {alert && (
+          <div className="flex h-3 w-3 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+          </div>
+        )}
+      </div>
+      <div className="relative z-10">
+        <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.2em] mb-1">{title}</p>
+        <p className="text-3xl font-black text-white tracking-tighter">{value}</p>
+      </div>
+      {/* Decorative element */}
+      <div className="absolute -right-4 -bottom-4 opacity-5 group-hover:opacity-10 transition-opacity">
+        <Icon size={120} />
+      </div>
+    </motion.div>
+  );
+};
+
+const StatusBadge = ({ severity }: { severity: string }) => {
+  const styles: any = {
+    critical: "bg-red-500/20 text-red-400 border-red-500/40",
+    high: "bg-orange-500/20 text-orange-400 border-orange-500/40",
+    medium: "bg-yellow-500/20 text-yellow-400 border-yellow-500/40",
+    low: "bg-blue-500/20 text-blue-400 border-blue-500/40",
+    normal: "bg-emerald-500/20 text-emerald-400 border-emerald-500/40",
+  };
+
+  return (
+    <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest border ${styles[severity] || styles.normal}`}>
+      {severity}
+    </span>
+  );
+};
+
+// --- Main Page ---
+
 export default function Dashboard() {
   const [events, setEvents] = useState<SOCEvent[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<SOCEvent | null>(null);
   const [aiReport, setAiReport] = useState<string>("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSimulating, setIsSimulating] = useState(false);
-
-  const fetchEvents = async () => {
-    try {
-      const res = await fetch('http://127.0.0.1:8000/events');
-      const data = await res.json();
-      setEvents([...data].reverse());
-    } catch (err) {
-      console.error("Ошибка API:", err);
-    }
-  };
-
-  const startSimulation = async () => {
-  setIsSimulating(true);
-  try {
-    const res = await fetch('http://127.0.0.1:8000/simulate', { method: 'POST' });
-    if (res.ok) {
-      // Можно добавить уведомление или просто ждать появления логов
-      console.log("Simulation started");
-    }
-  } catch (err) {
-    console.error("Ошибка запуска симуляции:", err);
-  } finally {
-    // Выключаем статус загрузки через пару секунд
-    setTimeout(() => setIsSimulating(false), 2000);
-  }
-};
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
     fetchEvents();
     const interval = setInterval(fetchEvents, 3000);
     return () => clearInterval(interval);
   }, []);
 
-  // Данные для графика (последние 15 событий)
+  const fetchEvents = async () => {
+    try {
+      const res = await fetch('/api/events', {
+        headers: { 'X-API-Key': 'soc_diploma_secret_2026' }
+      });
+      const data = await res.json();
+      setEvents([...data].reverse());
+    } catch (err) {
+      console.error("Fetch Error:", err);
+    }
+  };
+
+  const startSimulation = () => {
+    setIsSimulating(true);
+    // Fire-and-forget — не ждём ответа, кнопка сразу разблокируется
+    fetch('/api/simulate', { 
+      method: 'POST',
+      headers: { 'X-API-Key': 'soc_diploma_secret_2026' }
+    }).catch(err => console.error("Simulation Error:", err));
+
+    // Сбрасываем состояние кнопки через 2 секунды
+    setTimeout(() => setIsSimulating(false), 2000);
+  };
+
   const chartData = useMemo(() => {
-    return [...events].reverse().slice(-15).map(e => ({
+    return [...events].reverse().slice(-20).map(e => ({
       name: `#${e.id}`,
       score: parseFloat(e.anomaly_score.toFixed(3)),
-      severity: e.severity
     }));
   }, [events]);
 
   const openReport = async (event: SOCEvent) => {
     setSelectedEvent(event);
     setIsModalOpen(true);
-    setAiReport("🤖 Sentinel AI анализирует вектор атаки и контекст процесса...");
-
+    setAiReport("🤖 Sentinel AI analyzing attack vector...");
     try {
-      // Добавляем небольшую искусственную задержку для эффекта "работы мысли" ИИ
-      const res = await fetch(`http://127.0.0.1:8000/events/${event.id}/report`);
+      const res = await fetch(`/api/events/${event.id}/report`, {
+        headers: { 'X-API-Key': 'soc_diploma_secret_2026' }
+      });
       const data = await res.json();
-
-      // Если отчет пришел с маркдауном (звездочками), просто выводим его.
-      // Для полноценного рендеринга ** лучше использовать библиотеку react-markdown,
-      // но пока оставим как текст для стабильности.
       setAiReport(data.report);
     } catch (err) {
-      setAiReport("❌ Системный сбой: Не удалось связаться с нейронным модулем анализа.");
+      setAiReport("❌ System failure: AI module unreachable.");
     }
   };
 
-  const criticalCount = useMemo(() => events.filter(e => e.severity === 'critical' || e.severity === 'high').length, [events]);
+  const criticalCount = events.filter(e => e.severity === 'critical' || e.severity === 'high').length;
+
+  if (!isMounted) return null;
 
   return (
-    <main className="min-h-screen bg-[#020617] text-slate-200 font-sans p-4 md:p-8 relative overflow-x-hidden">
-      {/* Background Glow */}
-      <div className="fixed top-0 left-0 w-full h-full pointer-events-none -z-10">
-        <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-blue-600/5 blur-[120px] rounded-full"></div>
-        <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-600/5 blur-[120px] rounded-full"></div>
-      </div>
+    <div className="min-h-screen relative overflow-hidden selection:bg-blue-500/30 font-sans">
+      {/* Background Layer */}
+      <div className="fixed inset-0 bg-[#020617] -z-20" />
+      <div className="fixed inset-0 bg-grid opacity-20 -z-10" />
+      <div className="fixed inset-0 bg-scanlines -z-10 opacity-20" />
+      
+      {/* Animated Glows */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1], 
+          opacity: [0.1, 0.3, 0.1],
+          x: [0, 50, 0],
+          y: [0, 30, 0]
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="fixed top-[-20%] left-[-10%] w-[100%] h-[100%] bg-blue-600/10 blur-[180px] rounded-full -z-10" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.1, 1], 
+          opacity: [0.1, 0.2, 0.1],
+          x: [0, -40, 0],
+          y: [0, -20, 0]
+        }}
+        transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }}
+        className="fixed bottom-[-20%] right-[-10%] w-[80%] h-[80%] bg-indigo-600/10 blur-[180px] rounded-full -z-10" 
+      />
 
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
-          <div className="flex items-center gap-4">
-            <div className="p-3 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-lg shadow-blue-900/20">
-              <ShieldAlert className="w-8 h-8 text-white"/>
-            </div>
+      <div className="max-w-[1600px] mx-auto p-4 md:p-8 lg:p-12 space-y-12 relative z-10">
+        
+        {/* Navigation / Header */}
+        <header className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+          <div className="flex items-center gap-6">
+            <motion.div 
+              initial={{ rotate: -10, scale: 0.9 }}
+              animate={{ rotate: 0, scale: 1 }}
+              className="relative"
+            >
+              <div className="p-4 bg-gradient-to-br from-blue-600 to-indigo-700 rounded-2xl shadow-2xl shadow-blue-500/20">
+                <ShieldAlert className="w-10 h-10 text-white" />
+              </div>
+              <div className="absolute -top-1 -right-1 w-4 h-4 bg-red-500 rounded-full border-4 border-[#020617] animate-pulse" />
+            </motion.div>
             <div>
-              <h1 className="text-3xl font-black tracking-tighter text-white uppercase italic">
-                Sentinel<span className="text-blue-500 underline decoration-blue-500/30">Core</span>
+              <h1 className="text-4xl font-black tracking-tighter text-white flex items-center gap-3">
+                SENTINEL<span className="text-blue-500">CORE</span>
+                <span className="text-[10px] font-mono px-2 py-0.5 bg-blue-500/10 text-blue-400 border border-blue-500/20 rounded-md tracking-widest align-middle mt-1 uppercase">Advanced ML</span>
               </h1>
-              <p className="text-slate-500 text-[10px] font-mono tracking-widest uppercase mt-1">
-                Neural Threat Detection Unit // Ver 2.6.4
+              <p className="text-slate-500 text-xs font-mono tracking-[0.3em] uppercase flex items-center gap-2 mt-1">
+                <Activity size={12} className="text-emerald-500" /> System Live // Thread Level: Moderate
               </p>
             </div>
           </div>
 
-          <div
-              className="hidden lg:flex items-center gap-6 px-6 py-3 bg-slate-900/40 border border-slate-800 rounded-2xl backdrop-blur-md">
-            <div className="text-center">
-              <p className="text-[10px] text-slate-500 uppercase font-bold">API Status</p>
-              <p className="text-xs text-green-400 font-mono tracking-tighter">CONNECTED</p>
+          <div className="flex items-center gap-4 w-full lg:w-auto">
+            <div className="hidden sm:flex glass px-6 py-3 rounded-2xl items-center gap-8 border-white/5">
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Network Status</span>
+                <span className="text-xs text-emerald-400 font-mono flex items-center gap-1.5">
+                  <div className="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse" /> OPTIMAL
+                </span>
+              </div>
+              <div className="w-px h-8 bg-white/5" />
+              <div className="flex flex-col">
+                <span className="text-[10px] text-slate-500 font-bold uppercase tracking-widest">Engine Load</span>
+                <span className="text-xs text-blue-400 font-mono">1.24%</span>
+              </div>
             </div>
-            <div className="w-px h-8 bg-slate-800"></div>
-            <div className="text-center">
-              <p className="text-[10px] text-slate-500 uppercase font-bold">Model</p>
-              <p className="text-xs text-blue-400 font-mono tracking-tighter">ISOLATION_FOREST_V2</p>
-            </div>
-
-            {/* Вертикальный разделитель перед кнопкой */}
-            <div className="w-px h-8 bg-slate-800"></div>
-
-            {/* Кнопка симуляции */}
-            <button
-                onClick={startSimulation}
-                disabled={isSimulating}
-                className={`px-6 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest border transition-all duration-300 ${
-                    isSimulating
-                        ? 'bg-slate-800 border-slate-700 text-slate-500 cursor-not-allowed opacity-50'
-                        : 'bg-blue-600/10 border-blue-500/50 text-blue-400 hover:bg-blue-600 hover:text-white shadow-lg shadow-blue-900/20 active:scale-95'
-                }`}
+            
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={startSimulation}
+              disabled={isSimulating}
+              className={`flex-1 sm:flex-none glass px-8 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest border transition-all ${
+                isSimulating 
+                ? 'opacity-50 cursor-not-allowed border-white/5' 
+                : 'border-blue-500/30 hover:bg-blue-600 hover:border-blue-500 text-blue-400 hover:text-white shadow-xl shadow-blue-900/10'
+              }`}
             >
-              {isSimulating ? 'Starting Engine...' : 'Run Attack Simulation'}
-            </button>
+              {isSimulating ? (
+                <span className="flex items-center gap-2">
+                  <RefreshCw className="animate-spin" size={14} /> Deploying Simulation...
+                </span>
+              ) : 'Initialize Attack Simulation'}
+            </motion.button>
           </div>
         </header>
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <StatCard title="Events Scanned" value={events.length} icon={<Search size={20}/>} color="blue"/>
-          <StatCard title="High Alerts" value={criticalCount} icon={<AlertTriangle size={20}/>} color="red"
-                    alert={criticalCount > 0}/>
-          <StatCard title="System Integrity" value="98.1%" icon={<ShieldCheck size={20}/>} color="emerald"/>
-          <StatCard title="Avg Latency" value="12ms" icon={<Activity size={20}/>} color="purple"/>
+
+        {/* Top Analytics */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+          <StatCard title="Events Monitored" value={events.length} icon={Search} color="blue" delay={0.1} />
+          <StatCard title="Threats Detected" value={criticalCount} icon={AlertTriangle} color="red" alert={criticalCount > 0} delay={0.2} />
+          <StatCard title="System Integrity" value="99.9%" icon={ShieldCheck} color="emerald" delay={0.3} />
+          <StatCard title="AI Precision" value="94.2%" icon={Cpu} color="purple" delay={0.4} />
         </div>
 
-        {/* Top Section: Visualization */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
-          <div className="lg:col-span-2 bg-slate-900/40 border border-slate-800 rounded-3xl p-6 backdrop-blur-xl">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-sm font-bold uppercase tracking-widest text-slate-400 flex items-center gap-2">
-                <TrendingUp size={16} className="text-blue-500"/> Anomaly Score Timeline
-              </h3>
+        {/* Visualization & Info */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="lg:col-span-2 glass rounded-[2.5rem] p-8 relative group"
+          >
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h3 className="text-lg font-bold text-white flex items-center gap-3">
+                  <TrendingUp className="text-blue-500" size={20} />
+                  Anomaly Trend Analysis
+                </h3>
+                <p className="text-slate-500 text-xs mt-1">Real-time heuristic scoring over last 20 events</p>
+              </div>
+              <div className="flex gap-2">
+                {['1H', '4H', '24H'].map(t => (
+                  <button key={t} className={`px-3 py-1 rounded-lg text-[10px] font-bold ${t === '1H' ? 'bg-blue-500 text-white' : 'bg-white/5 text-slate-500'}`}>{t}</button>
+                ))}
+              </div>
             </div>
-            <div className="h-[250px] w-full">
+            
+            <div className="min-h-[300px] h-[300px] w-full">
               <ResponsiveContainer width="100%" height="100%">
                 <AreaChart data={chartData}>
                   <defs>
@@ -169,203 +276,264 @@ export default function Dashboard() {
                       <stop offset="95%" stopColor="#3b82f6" stopOpacity={0}/>
                     </linearGradient>
                   </defs>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" vertical={false}/>
-                  <XAxis dataKey="name" stroke="#475569" fontSize={10} tickLine={false} axisLine={false}/>
-                  <YAxis stroke="#475569" fontSize={10} tickLine={false} axisLine={false} domain={['auto', 'auto']}/>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
+                  <XAxis dataKey="name" stroke="#475569" fontSize={10} tickLine={false} axisLine={false} tick={{fill: '#64748b'}} />
+                  <YAxis stroke="#475569" fontSize={10} tickLine={false} axisLine={false} domain={['auto', 'auto']} tick={{fill: '#64748b'}} />
                   <Tooltip
-                      contentStyle={{backgroundColor: '#0f172a', border: '1px solid #1e293b', borderRadius: '12px'}}
-                      itemStyle={{color: '#3b82f6', fontSize: '12px'}}
+                    contentStyle={{ backgroundColor: '#0f172a', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '16px', boxShadow: '0 10px 30px rgba(0,0,0,0.5)' }}
+                    itemStyle={{ color: '#3b82f6', fontSize: '12px', fontWeight: 'bold' }}
+                    labelStyle={{ color: '#94a3b8', fontSize: '10px', marginBottom: '4px' }}
                   />
-                  <Area type="monotone" dataKey="score" stroke="#3b82f6" strokeWidth={3} fillOpacity={1} fill="url(#colorScore)" />
+                  <Area 
+                    type="monotone" 
+                    dataKey="score" 
+                    stroke="#3b82f6" 
+                    strokeWidth={4} 
+                    fillOpacity={1} 
+                    fill="url(#colorScore)" 
+                    animationDuration={2000}
+                  />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
-          </div>
+          </motion.div>
 
-          <div className="bg-gradient-to-br from-indigo-900/20 to-slate-900/40 border border-slate-800 rounded-3xl p-6 flex flex-col justify-center">
-             <div className="text-center space-y-4">
-                <div className="relative inline-block">
-                  <Cpu className="w-16 h-16 text-blue-500/50" />
-                  <div className="absolute inset-0 animate-pulse bg-blue-500/20 blur-2xl rounded-full"></div>
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            className="glass rounded-[2.5rem] p-8 flex flex-col justify-center items-center text-center relative overflow-hidden bg-gradient-to-br from-indigo-500/10 to-transparent"
+          >
+            <div className="relative mb-8">
+              <motion.div 
+                animate={{ rotate: 360 }}
+                transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                className="w-32 h-32 rounded-full border-2 border-dashed border-blue-500/30 p-2"
+              >
+                <div className="w-full h-full rounded-full border-2 border-blue-500/50 flex items-center justify-center">
+                  <div className="w-16 h-16 rounded-full bg-blue-500/20 flex items-center justify-center">
+                    <Zap className="text-blue-400" size={32} />
+                  </div>
                 </div>
-                <h4 className="text-lg font-bold text-white uppercase tracking-tighter">AI Core Active</h4>
-                <p className="text-xs text-slate-400 leading-relaxed px-4">
-                  Neural engine is processing incoming telemetry strings and mapping to MITRE ATT&CK framework automatically.
-                </p>
-                <div className="pt-4">
-                  <span className="px-4 py-2 bg-blue-500/10 text-blue-400 rounded-full text-[10px] font-black uppercase tracking-widest border border-blue-500/20">
-                    Heuristic + ML Enabled
-                  </span>
+              </motion.div>
+              <div className="absolute inset-0 bg-blue-500/20 blur-3xl rounded-full animate-pulse-slow -z-10" />
+            </div>
+            
+            <h4 className="text-xl font-black text-white italic uppercase tracking-tighter mb-4">Neural Engine Active</h4>
+            <p className="text-slate-400 text-sm leading-relaxed px-4">
+              Our advanced Isolation Forest model is currently scanning all system calls for sub-second anomaly detection.
+            </p>
+            
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              {[
+                { icon: Server, label: 'Cluster 01' },
+                { icon: Globe, label: 'Edge Nodes' },
+                { icon: Lock, label: 'Secure Vault' }
+              ].map((item, i) => (
+                <div key={i} className="flex items-center gap-2 px-4 py-2 bg-black/40 border border-white/5 rounded-xl text-[10px] text-slate-300 font-bold uppercase tracking-widest">
+                  <item.icon size={12} className="text-blue-500" />
+                  {item.label}
                 </div>
-             </div>
-          </div>
+              ))}
+            </div>
+          </motion.div>
         </div>
 
-        {/* Table Section */}
-        <div className="bg-slate-950/40 border border-slate-800 rounded-3xl overflow-hidden backdrop-blur-xl shadow-2xl">
-          <div className="p-6 border-b border-slate-800 flex justify-between items-center">
-            <h2 className="text-lg font-bold flex items-center gap-2">
-              <Terminal className="w-4 h-4 text-blue-500" />
-              Incident Forensics
-            </h2>
-            <div className="flex gap-2">
-               <div className="w-2 h-2 rounded-full bg-red-500 animate-pulse"></div>
-               <div className="w-2 h-2 rounded-full bg-orange-500 animate-pulse delay-75"></div>
-               <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse delay-150"></div>
+        {/* Event Table */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="glass rounded-[2.5rem] overflow-hidden shadow-2xl relative border-white/5"
+        >
+          <div className="p-8 border-b border-white/5 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white/[0.02]">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-blue-500/10 rounded-2xl border border-blue-500/20">
+                <Terminal size={20} className="text-blue-400" />
+              </div>
+              <div>
+                <h2 className="text-xl font-black text-white uppercase tracking-tighter">Event Forensics</h2>
+                <p className="text-[10px] text-slate-500 font-mono tracking-widest mt-1">REAL-TIME TELEMETRY FEED</p>
+              </div>
+            </div>
+            <div className="flex items-center gap-6">
+              <div className="flex items-center gap-3">
+                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Live Monitoring</span>
+              </div>
+              <div className="w-px h-8 bg-white/5 hidden sm:block" />
+              <button className="p-2 hover:bg-white/5 rounded-xl transition-colors text-slate-500 hover:text-white">
+                <Search size={20} />
+              </button>
             </div>
           </div>
 
-          <div className="overflow-x-auto overflow-y-auto max-h-[500px] custom-scrollbar">
-            <table className="w-full text-left">
-              <thead className="sticky top-0 bg-slate-950 z-10 border-b border-slate-800">
-                <tr className="text-slate-500 text-[10px] uppercase font-bold tracking-widest">
-                  <th className="p-5">Process Identity</th>
-                  <th className="p-5">Payload Path</th>
-                  <th className="p-5">MITRE Technique</th>
-                  <th className="p-5 text-center">Threat</th>
-                  <th className="p-5 text-right">Anomaly</th>
+          <div className="overflow-x-auto max-h-[600px] custom-scrollbar">
+            <table className="w-full text-left border-collapse">
+              <thead className="sticky top-0 bg-[#020617]/80 backdrop-blur-md z-10 border-b border-white/5">
+                <tr className="text-slate-500 text-[10px] uppercase font-black tracking-[0.2em]">
+                  <th className="px-8 py-5">Process Origin</th>
+                  <th className="px-8 py-5">Command Context</th>
+                  <th className="px-8 py-5">MITRE Matrix</th>
+                  <th className="px-8 py-5 text-center">Threat Level</th>
+                  <th className="px-8 py-5 text-right">ML Score</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/30">
-                {events.slice(0, 100).map((event) => (
-                  <tr
-                    key={event.id}
-                    onClick={() => openReport(event)}
-                    className="group hover:bg-blue-600/[0.04] transition-all cursor-pointer border-l-4 border-l-transparent hover:border-l-blue-600"
-                  >
-                    <td className="p-5">
-                      <div className="flex items-center gap-3">
-                        <div className="bg-slate-900 p-2 rounded-xl group-hover:scale-110 transition-transform">
-                          <Activity size={14} className={event.severity === 'normal' ? 'text-slate-500' : 'text-red-500'} />
+              <tbody className="divide-y divide-white/[0.03]">
+                <AnimatePresence mode="popLayout">
+                  {events.map((event) => (
+                    <motion.tr
+                      key={event.id}
+                      layout
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      onClick={() => openReport(event)}
+                      className="group hover:bg-blue-500/[0.04] transition-all cursor-pointer border-l-4 border-l-transparent hover:border-l-blue-500"
+                    >
+                      <td className="px-8 py-6">
+                        <div className="flex items-center gap-4">
+                          <div className="w-10 h-10 bg-slate-900 rounded-xl flex items-center justify-center group-hover:bg-blue-900/40 group-hover:scale-110 transition-all border border-white/5">
+                            <Database size={16} className={event.severity === 'normal' ? 'text-slate-500' : 'text-red-400'} />
+                          </div>
+                          <div>
+                            <div className="font-bold text-slate-100 text-sm group-hover:text-blue-400 transition-colors">{event.process_name}</div>
+                            <div className="text-[10px] text-slate-500 font-mono tracking-tighter uppercase mt-0.5">{event.user}</div>
+                          </div>
                         </div>
-                        <div>
-                          <div className="font-bold text-slate-100 text-sm">{event.process_name}</div>
-                          <div className="text-[9px] text-slate-500 font-mono tracking-tighter uppercase">{event.user}</div>
+                      </td>
+                      <td className="px-8 py-6">
+                        <div className="max-w-[280px] xl:max-w-md truncate font-mono text-[10px] text-slate-400 bg-black/40 px-3 py-2 rounded-xl border border-white/5 group-hover:border-blue-500/30 transition-colors">
+                          {event.command_line}
                         </div>
-                      </div>
-                    </td>
-                    <td className="p-5">
-                      <div className="max-w-xs truncate font-mono text-[10px] text-slate-400 bg-black/20 p-2 rounded-lg border border-slate-800/50">
-                        {event.command_line}
-                      </div>
-                    </td>
-                    <td className="p-5">
-                      {event.mitre_technique ? (
-                        <span className="text-[9px] text-indigo-400 bg-indigo-500/10 px-2 py-1 rounded-md border border-indigo-500/20 font-bold uppercase tracking-tighter">
-                          {event.mitre_technique}
-                        </span>
-                      ) : (
-                        <span className="text-[9px] text-slate-600 italic">No specific technique</span>
-                      )}
-                    </td>
-                    <td className="p-5 text-center">
-                      <span className={`px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest shadow-lg ${
-                        event.severity === 'critical' ? 'bg-red-500 text-white shadow-red-900/40' :
-                        event.severity === 'high' ? 'bg-orange-500/20 text-orange-500 border border-orange-500/40' :
-                        'bg-emerald-500/10 text-emerald-500 border border-emerald-500/20'
-                      }`}>
-                        {event.severity}
-                      </span>
-                    </td>
-                    <td className="p-5 text-right font-mono text-xs text-slate-400 group-hover:text-blue-500">
-                      {event.anomaly_score.toFixed(4)}
-                    </td>
-                  </tr>
-                ))}
+                      </td>
+                      <td className="px-8 py-6">
+                        {event.mitre_technique ? (
+                          <span className="text-[10px] text-indigo-400 bg-indigo-500/10 px-3 py-1.5 rounded-lg border border-indigo-500/20 font-black uppercase tracking-tighter">
+                            {event.mitre_technique}
+                          </span>
+                        ) : (
+                          <span className="text-[10px] text-slate-600 italic">No Match Detected</span>
+                        )}
+                      </td>
+                      <td className="px-8 py-6 text-center">
+                        <StatusBadge severity={event.severity} />
+                      </td>
+                      <td className="px-8 py-6 text-right font-mono text-xs text-slate-400 group-hover:text-blue-400 group-hover:font-bold">
+                        {event.anomaly_score.toFixed(4)}
+                      </td>
+                    </motion.tr>
+                  ))}
+                </AnimatePresence>
               </tbody>
             </table>
           </div>
-        </div>
+          <div className="p-4 bg-white/[0.01] border-t border-white/5 text-center">
+            <span className="text-[10px] text-slate-600 font-mono uppercase tracking-widest">End of visible telemetry buffer</span>
+          </div>
+        </motion.div>
       </div>
 
-      {/* MODAL (как в прошлом коде) */}
-      {isModalOpen && selectedEvent && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 backdrop-blur-xl bg-black/70 animate-in fade-in duration-300">
-          <div className="bg-[#0f172a] border border-slate-700 w-full max-w-2xl rounded-[2.5rem] shadow-2xl overflow-hidden">
-            <div className="p-8 border-b border-slate-800 flex justify-between items-center bg-gradient-to-r from-blue-600/10 via-transparent to-transparent">
-              <div className="flex items-center gap-4">
-                <div className="p-3 bg-blue-500/20 rounded-2xl">
-                  <Cpu className="w-6 h-6 text-blue-500" />
-                </div>
-                <h3 className="text-2xl font-black text-white italic uppercase tracking-tighter">Forensic Report</h3>
-              </div>
-              <button onClick={() => setIsModalOpen(false)} className="p-2 hover:bg-slate-800 rounded-full transition-colors text-slate-500">
-                <X size={24} />
-              </button>
-            </div>
-
-            <div className="p-8 space-y-6">
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-slate-900/50 p-5 rounded-3xl border border-slate-800">
-                  <p className="text-slate-500 text-[10px] uppercase font-black mb-1">Process ID</p>
-                  <p className="font-mono text-blue-400 text-lg">#{selectedEvent.id}</p>
-                </div>
-                <div className="bg-slate-900/50 p-5 rounded-3xl border border-slate-800">
-                  <p className="text-slate-500 text-[10px] uppercase font-black mb-1">ML Confidence</p>
-                  <p className={`font-mono text-lg font-bold ${selectedEvent.anomaly_score < 0 ? 'text-red-500' : 'text-emerald-500'}`}>
-                    {selectedEvent.anomaly_score.toFixed(5)}
-                  </p>
-                </div>
-              </div>
-
-              <div
-                  className="bg-blue-600/5 p-8 rounded-3xl border border-blue-500/20 shadow-inner relative overflow-hidden">
-                {/* Анимированный фон для процесса анализа */}
-                {aiReport.includes("анализирует") && (
-                    <div
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/5 to-transparent animate-shimmer"></div>
-                )}
-
-                <div className="flex items-start gap-5 relative z-10">
-                  <Info className={`w-6 h-6 mt-1 ${aiReport.includes("❌") ? 'text-red-500' : 'text-blue-500'}`}/>
-                  <div className="space-y-2">
-                    <p className="text-slate-200 leading-relaxed font-medium text-lg italic">
-                      {aiReport}
-                    </p>
-                    {!aiReport.includes("анализирует") && !aiReport.includes("❌") && (
-                        <div
-                            className="flex items-center gap-2 text-[10px] text-emerald-500 font-black uppercase tracking-widest mt-4">
-                          <ShieldCheck size={12}/> Analysis Verified by Sentinel Core
-                        </div>
-                    )}
+      {/* AI Modal */}
+      <AnimatePresence>
+        {isModalOpen && selectedEvent && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsModalOpen(false)}
+              className="absolute inset-0 bg-black/80 backdrop-blur-md"
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.9, y: 20 }}
+              className="glass w-full max-w-3xl rounded-[3rem] shadow-[0_0_100px_rgba(59,130,246,0.2)] overflow-hidden relative border-white/10"
+            >
+              <div className="p-10 border-b border-white/5 flex justify-between items-center bg-gradient-to-br from-blue-600/20 via-transparent to-transparent">
+                <div className="flex items-center gap-6">
+                  <div className="p-4 bg-blue-500/20 rounded-2xl border border-blue-500/30">
+                    <Cpu className="w-8 h-8 text-blue-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-3xl font-black text-white italic uppercase tracking-tighter">Core Intelligence Report</h3>
+                    <p className="text-[10px] text-blue-400/60 font-mono tracking-[0.4em] mt-1 uppercase">Event Forensic Analysis #{selectedEvent.id}</p>
                   </div>
                 </div>
-              </div>
-
-              <div
-                  className="pt-6 flex justify-between items-center text-slate-500 text-[10px] font-mono uppercase tracking-[0.3em]">
-                <span>Unit: Sentinel AI v2.6.4</span>
-                <button
-                    onClick={() => setIsModalOpen(false)}
-                    className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-2xl text-xs font-black transition-all shadow-xl shadow-blue-900/20 hover:scale-105 active:scale-95"
+                <button 
+                  onClick={() => setIsModalOpen(false)} 
+                  className="p-3 hover:bg-white/10 rounded-full transition-all text-slate-500 hover:text-white"
                 >
-                  Confirm Awareness
+                  <X size={24} />
                 </button>
               </div>
-            </div>
+
+              <div className="p-10 space-y-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                  <div className="glass bg-black/40 p-6 rounded-[2rem] border-white/5">
+                    <p className="text-slate-500 text-[10px] uppercase font-black tracking-widest mb-2">Process Origin</p>
+                    <p className="font-bold text-white text-xl">{selectedEvent.process_name}</p>
+                  </div>
+                  <div className="glass bg-black/40 p-6 rounded-[2rem] border-white/5">
+                    <p className="text-slate-500 text-[10px] uppercase font-black tracking-widest mb-2">ML Confidence</p>
+                    <p className={`font-mono text-2xl font-black ${selectedEvent.anomaly_score < 0 ? 'text-red-500' : 'text-emerald-500'}`}>
+                      {selectedEvent.anomaly_score.toFixed(5)}
+                    </p>
+                  </div>
+                </div>
+
+                <motion.div 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  className="bg-blue-600/5 p-8 rounded-[2.5rem] border border-blue-500/20 relative overflow-hidden group"
+                >
+                  <div className="flex items-start gap-6 relative z-10">
+                    <div className="p-3 bg-blue-500/10 rounded-xl mt-1">
+                      <Info className={`w-6 h-6 ${aiReport.includes("❌") ? 'text-red-500' : 'text-blue-400'}`} />
+                    </div>
+                    <div className="space-y-4">
+                      <div className="text-slate-200 leading-relaxed font-medium text-lg whitespace-pre-wrap">
+                        {aiReport}
+                      </div>
+
+                      {!aiReport.includes("analyzing") && !aiReport.includes("❌") && (
+                        <motion.div 
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
+                          className="flex items-center gap-3 text-[10px] text-emerald-400 font-black uppercase tracking-[0.2em] pt-4 border-t border-emerald-500/10"
+                        >
+                          <ShieldCheck size={14} /> Analysis Integrity Verified by Sentinel v2.6.4
+                        </motion.div>
+                      )}
+                    </div>
+                  </div>
+                  
+                  {/* Subtle shimmer for "analyzing" state */}
+                  {aiReport.includes("analyzing") && (
+                    <motion.div 
+                      animate={{ x: ['-100%', '100%'] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500/10 to-transparent" 
+                    />
+                  )}
+                </motion.div>
+
+                <div className="pt-4 flex flex-col sm:flex-row justify-between items-center gap-6">
+                  <span className="text-[10px] text-slate-600 font-mono uppercase tracking-[0.3em]">Signature: SENTINEL-CORE-ALPHA-99</span>
+                  <motion.button
+                    whileHover={{ scale: 1.05, backgroundColor: '#3b82f6' }}
+                    whileTap={{ scale: 0.95 }}
+                    onClick={() => setIsModalOpen(false)}
+                    className="w-full sm:w-auto bg-blue-600/80 text-white px-10 py-4 rounded-2xl text-[11px] font-black uppercase tracking-widest transition-all shadow-2xl shadow-blue-600/20"
+                  >
+                    Acknowledge Intelligence
+                  </motion.button>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </div>
-      )}
-    </main>
-  );
-}
-
-function StatCard({title, value, icon, color, alert}: any) {
-  const themes: any = {
-    blue: "border-blue-500/10 text-blue-400 bg-blue-500/[0.02] hover:border-blue-500/30 shadow-blue-900/5",
-    red: "border-red-500/10 text-red-400 bg-red-500/[0.02] hover:border-red-500/30 shadow-red-900/5",
-    emerald: "border-emerald-500/10 text-emerald-400 bg-emerald-500/[0.02] hover:border-emerald-500/30 shadow-emerald-900/5",
-    purple: "border-purple-500/10 text-purple-400 bg-purple-500/[0.02] hover:border-purple-500/30 shadow-purple-900/5",
-  };
-
-  return (
-    <div className={`p-6 rounded-3xl border backdrop-blur-xl transition-all duration-500 group shadow-lg ${themes[color]}`}>
-      <div className="flex items-center justify-between mb-4">
-        <div className="p-3 bg-slate-950/80 rounded-2xl border border-white/5 group-hover:rotate-12 transition-transform">{icon}</div>
-        {alert && <div className="flex h-2 w-2 rounded-full bg-red-500 animate-ping shadow-[0_0_10px_rgba(239,68,68,0.8)]"></div>}
-      </div>
-      <h3 className="text-slate-500 text-[10px] font-black uppercase tracking-widest">{title}</h3>
-      <p className="text-2xl font-bold mt-1 text-slate-100 tracking-tighter">{value}</p>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

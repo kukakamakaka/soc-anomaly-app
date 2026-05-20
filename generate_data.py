@@ -2,7 +2,7 @@ import requests
 import time
 import random
 
-BASE_URL = "http://localhost:8000"
+BASE_URL = "http://127.0.0.1:8000"
 
 # 1. Примеры нормального поведения (для обучения)
 normal_events = [
@@ -23,7 +23,8 @@ malicious_events = [
 
 def send_to_soc(event):
     try:
-        response = requests.post(f"{BASE_URL}/ingest", json=event)
+        headers = {"X-API-Key": "soc_diploma_secret_2026"}
+        response = requests.post(f"{BASE_URL}/ingest", json=event, headers=headers)
         print(f"Sent: {event['process_name']} | Status: {response.status_code} | Result: {response.json().get('severity')}")
     except Exception as e:
         print(f"Error: {e}. Убедись, что FastAPI запущен!")
@@ -33,9 +34,9 @@ if __name__ == "__main__":
     for _ in range(20): # Модели нужно хотя бы 10-20 событий для старта
         event = random.choice(normal_events)
         send_to_soc(event)
-        time.sleep(0.1)
+        time.sleep(0.05)  # было 0.1
 
     print("\n--- Отправка подозрительных событий ---")
     for event in malicious_events:
         send_to_soc(event)
-        time.sleep(1)
+        time.sleep(0.2)  # было 1.0

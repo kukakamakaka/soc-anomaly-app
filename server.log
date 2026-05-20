@@ -1,0 +1,1506 @@
+INFO:     Started server process [26494]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:53468 - "POST /simulate HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53471 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53473 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53475 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53477 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53479 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53481 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53483 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53485 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53487 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53489 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53491 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53493 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53495 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53497 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53499 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53501 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53503 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53505 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53507 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53509 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53511 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53514 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53516 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53518 - "POST /ingest HTTP/1.1" 200 OK
+--- Отправка нормальных данных для обучения ---
+Sent: python.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+
+--- Отправка подозрительных событий ---
+Sent: powershell.exe | Status: 200 | Result: high
+Sent: cmd.exe | Status: 200 | Result: high
+Sent: curl.exe | Status: 200 | Result: high
+Sent: bitsadmin.exe | Status: 200 | Result: high
+INFO:     127.0.0.1:53522 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53529 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53531 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53531 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53531 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53531 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53531 - "POST /simulate HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53541 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53543 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53545 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53547 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53531 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53549 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53552 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53554 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53556 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53558 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53531 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53560 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53562 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53564 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53566 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53531 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events/285/report HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53569 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53573 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53576 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53578 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53581 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53583 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53585 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53587 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events/294/report HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53590 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53592 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53594 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+--- Отправка нормальных данных для обучения ---
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+
+--- Отправка подозрительных событий ---
+Sent: powershell.exe | Status: 200 | Result: high
+Sent: cmd.exe | Status: 200 | Result: high
+Sent: curl.exe | Status: 200 | Result: high
+Sent: bitsadmin.exe | Status: 200 | Result: high
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "POST /simulate HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53601 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53603 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53605 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53607 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53609 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53611 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53613 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53615 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53617 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53619 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53621 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53623 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53625 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53627 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53629 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53631 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53633 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53636 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53638 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53640 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53642 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53644 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53646 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53648 - "POST /ingest HTTP/1.1" 200 OK
+--- Отправка нормальных данных для обучения ---
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+
+--- Отправка подозрительных событий ---
+Sent: powershell.exe | Status: 200 | Result: high
+Sent: cmd.exe | Status: 200 | Result: high
+Sent: curl.exe | Status: 200 | Result: high
+Sent: bitsadmin.exe | Status: 200 | Result: high
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events/316/report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53570 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53702 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53705 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53706 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events/324/report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "POST /simulate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53823 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53825 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53827 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53829 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53831 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53833 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53835 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53837 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53839 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53841 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53845 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53848 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53850 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53852 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53855 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53858 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53860 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53862 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53864 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53866 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53868 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53870 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53872 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53874 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+--- Отправка нормальных данных для обучения ---
+Sent: python.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+
+--- Отправка подозрительных событий ---
+Sent: powershell.exe | Status: 200 | Result: high
+Sent: cmd.exe | Status: 200 | Result: high
+Sent: curl.exe | Status: 200 | Result: high
+Sent: bitsadmin.exe | Status: 200 | Result: high
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "POST /simulate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53885 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53887 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53792 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53889 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53891 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53894 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53896 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53899 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53901 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53903 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53905 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53908 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53912 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53914 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53916 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53921 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53923 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53925 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53927 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53929 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53931 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53933 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53936 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53938 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53941 - "POST /ingest HTTP/1.1" 200 OK
+--- Отправка нормальных данных для обучения ---
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+
+--- Отправка подозрительных событий ---
+Sent: powershell.exe | Status: 200 | Result: high
+Sent: cmd.exe | Status: 200 | Result: high
+Sent: curl.exe | Status: 200 | Result: high
+Sent: bitsadmin.exe | Status: 200 | Result: high
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53897 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53710 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53959 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53959 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53959 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53959 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53960 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53959 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53959 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53976 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53976 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53976 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53981 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events/372/report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "POST /simulate HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54005 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54008 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54010 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54012 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54014 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54016 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54018 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54020 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54023 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54026 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54028 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54030 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54032 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54034 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54036 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54038 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:53974 - "GET /events/385/report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54041 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54043 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54045 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54047 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54049 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54051 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54053 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54056 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+--- Отправка нормальных данных для обучения ---
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+
+--- Отправка подозрительных событий ---
+Sent: powershell.exe | Status: 200 | Result: high
+Sent: cmd.exe | Status: 200 | Result: high
+Sent: curl.exe | Status: 200 | Result: high
+Sent: bitsadmin.exe | Status: 200 | Result: high
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53974 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events/396/report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "POST /simulate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54178 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54180 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54182 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54184 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54186 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54188 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54190 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54192 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54194 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54196 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54198 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54200 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54202 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54205 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54208 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54210 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54212 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54214 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54217 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54219 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54221 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54224 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54226 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54228 - "POST /ingest HTTP/1.1" 200 OK
+--- Отправка нормальных данных для обучения ---
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+
+--- Отправка подозрительных событий ---
+Sent: powershell.exe | Status: 200 | Result: high
+Sent: cmd.exe | Status: 200 | Result: high
+Sent: curl.exe | Status: 200 | Result: high
+Sent: bitsadmin.exe | Status: 200 | Result: high
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "POST /simulate HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54336 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54338 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54340 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54342 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54344 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54346 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54350 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54352 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54354 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54356 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54358 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54360 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54362 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54364 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54366 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54368 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54370 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54372 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events/436/report HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54374 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54376 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54378 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54380 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54382 - "POST /ingest HTTP/1.1" 200 OK
+INFO:app.anomaly_detector:Модель успешно обучена и сохранена.
+INFO:     127.0.0.1:54384 - "POST /ingest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+--- Отправка нормальных данных для обучения ---
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: python.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: explorer.exe | Status: 200 | Result: normal
+Sent: slack.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+Sent: svchost.exe | Status: 200 | Result: normal
+Sent: chrome.exe | Status: 200 | Result: normal
+
+--- Отправка подозрительных событий ---
+Sent: powershell.exe | Status: 200 | Result: high
+Sent: cmd.exe | Status: 200 | Result: high
+Sent: curl.exe | Status: 200 | Result: high
+Sent: bitsadmin.exe | Status: 200 | Result: high
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events/442/report HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54102 - "GET /events HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [26494]

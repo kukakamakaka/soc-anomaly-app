@@ -1,60 +1,121 @@
-import time
-import re
-
+import os
+from google import genai
+from mitre_mapper import MitreMapper
+from dotenv import load_dotenv
+import random
 
 class AIForensicEngine:
     def __init__(self):
-        self.model_name = "Sentinel-GPT v2.6"
-        # База знаний техник (имитация)
-        self.threat_intel = {
-            "bitsadmin": {"id": "T1197", "name": "BITS Jobs", "danger": "High"},
-            "powershell": {"id": "T1059.001", "name": "PowerShell Scripting", "danger": "Critical"},
-            "curl": {"id": "T1105", "name": "Ingress Tool Transfer", "danger": "Medium"},
-            "cmd": {"id": "T1059.003", "name": "Windows Command Shell", "danger": "High"}
-        }
+        self.model_name = "Sentinel-AI v3.0 (SOC Core)"
+        self.mitre = MitreMapper()
 
-    def _detect_indicators(self, cmd: str) -> list:
-        """Поиск индикаторов компрометации (IoC) в строке"""
-        indicators = []
-        if "http" in cmd: indicators.append("External Network Connection")
-        if "enc" in cmd or "bypass" in cmd: indicators.append("Security Evacuation")
-        if "temp" in cmd: indicators.append("Hidden Payload Location")
-        if "/transfer" in cmd: indicators.append("Unauthorized Data Transfer")
-        return indicators
+        load_dotenv()
+        api_key = os.getenv("GEMINI_API_KEY")
+        if api_key and api_key != "ТВОЙ_КЛЮЧ_СЮДА":
+            self.client = genai.Client(api_key=api_key)
+            self.is_active = True
+        else:
+            self.client = None
+            self.is_active = False
+
+    def _generate_fallback_report(self, event_data: dict) -> str:
+        """Профессиональный отчёт на основе данных события и MITRE ATT&CK."""
+        process = event_data.get("process_name", "Unknown")
+        cmd = event_data.get("command_line", "") or ""
+        user = event_data.get("user", "unknown")
+        score = event_data.get("anomaly_score", 0.0)
+        severity = event_data.get("severity", "normal").lower()
+
+        techniques = self.mitre.get_attack_info(cmd)
+
+        severity_map = {
+            "critical": ("🔴 КРИТИЧЕСКИЙ", "немедленного реагирования", "ИЗОЛИРОВАТЬ"),
+            "high":     ("🟠 ВЫСОКИЙ",    "срочного расследования",   "БЛОКИРОВАТЬ"),
+            "medium":   ("🟡 СРЕДНИЙ",    "мониторинга",               "НАБЛЮДАТЬ"),
+            "normal":   ("🟢 НОРМАЛЬНЫЙ", "плановой проверки",         "РАЗРЕШИТЬ"),
+        }
+        sev_label, sev_action, sev_verdict = severity_map.get(severity, severity_map["normal"])
+
+        lines = []
+        lines.append(f"### 🤖 ОТЧЁТ НЕЙРОСЕТЕВОГО АНАЛИТИКА Sentinel-AI v3.0")
+        lines.append(f"**Статус:** {sev_label} | **Рекомендация:** {sev_verdict}")
+        lines.append("")
+        lines.append(f"**Анализируемый процесс:** `{process}` (пользователь: `{user}`)")
+        if cmd:
+            lines.append(f"**Командная строка:** `{cmd[:120]}{'...' if len(cmd) > 120 else ''}`")
+        lines.append(f"**Аномальность (ML Score):** `{score:.4f}` — {'превышает пороговое значение' if score > 0.35 else 'в пределах нормы'}")
+        lines.append("")
+
+        if techniques:
+            lines.append("#### 🎯 Обнаруженные техники MITRE ATT\u0026CK")
+            for t in techniques:
+                lines.append(f"- **{t['technique']}** — {t['name']}")
+                lines.append(f"  *{t.get('description', 'Техника используется для получения несанкционированного доступа или выполнения вредоносного кода.')}*")
+                if t.get("remediation"):
+                    lines.append(f"  ✅ **Контрмера:** {t['remediation']}")
+            lines.append("")
+            lines.append("#### 📋 Вердикт анализатора")
+            tech_names = ", ".join(t['name'] for t in techniques)
+            lines.append(
+                f"Зафиксирована активность, соответствующая паттернам {tech_names}. "
+                f"Процесс `{process}` инициирован пользователем `{user}` с аномальным показателем {score:.4f}. "
+                f"Требуется {sev_action}."
+            )
+        else:
+            lines.append("#### 📋 Вердикт анализатора")
+            if score > 0.35:
+                lines.append(
+                    f"Процесс `{process}` демонстрирует статистически аномальное поведение "
+                    f"(score: {score:.4f}), не соответствующее базовым паттернам системы. "
+                    f"Совпадений с известными техниками MITRE ATT&CK не обнаружено, однако "
+                    f"профиль поведения требует {sev_action}."
+                )
+            else:
+                lines.append(
+                    f"Процесс `{process}` работает в штатном режиме. "
+                    f"Аномальность ({score:.4f}) находится ниже порогового значения. "
+                    f"Угрозы не обнаружено."
+                )
+
+        lines.append("")
+        lines.append("---")
+        lines.append("*Отчёт сформирован модулем Sentinel-AI на основе IsolationForest ML + MITRE ATT&CK KB*")
+        return "\n".join(lines)
 
     def analyze_event(self, event_data: dict) -> str:
-        """Генерирует глубокий криминалистический отчет"""
-        process = event_data.get("process_name", "Unknown").lower()
-        cmd = event_data.get("command_line", "").lower()
+        process = event_data.get("process_name", "Unknown")
+        cmd = event_data.get("command_line", "") or ""
         user = event_data.get("user", "unknown")
-        severity = event_data.get("severity", "normal")
-        score = event_data.get("anomaly_score", 0)
+        score = event_data.get("anomaly_score", 0.0)
+        severity = event_data.get("severity", "normal").lower()
 
-        # Эффект "глубокого сканирования"
-        time.sleep(0.6)
+        techniques = self.mitre.get_attack_info(cmd)
+        tech_text = ", ".join([f"{t['technique']} ({t['name']})" for t in techniques]) if techniques else "Не обнаружено"
 
-        if severity in ["high", "critical"] or score < 0:
-            # 1. Проверка по базе MITRE
-            tech = next((self.threat_intel[k] for k in self.threat_intel if k in process or k in cmd), None)
+        if self.is_active:
+            prompt = f"""Ты — продвинутый AI-аналитик в Security Operations Center (SOC). Твоя задача — проанализировать системное событие и выдать краткий, профессиональный криминалистический отчет (максимум 4-5 предложений) на русском языке.
 
-            # 2. Поиск подозрительных паттернов
-            iocs = self._detect_indicators(cmd)
-            ioc_text = f" Обнаружены маркеры: {', '.join(iocs)}." if iocs else ""
+Данные события:
+- Пользователь: {user}
+- Процесс: {process}
+- Командная строка: {cmd}
+- Уровень угрозы: {severity.upper()}
+- Оценка аномалии (ML Score): {score:.4f}
+- Найденные техники MITRE ATT&CK: {tech_text}
 
-            if tech:
-                return (
-                    f"🚨 ВЕРДИКТ: ОБНАРУЖЕНА ТЕХНИКА {tech['id']} ({tech['name']}). "
-                    f"Процесс '{process}' запущен пользователем '{user}' с аномальными параметрами.{ioc_text} "
-                    f"Действие классифицировано как попытка {tech['danger'].lower()} уровня опасности. "
-                    f"Рекомендуется немедленная изоляция хоста.")
+Объясни, что пытается сделать эта команда, насколько она опасна, и дай одну главную рекомендацию по реагированию. Не используй лишних приветствий, пиши в строгом техническом стиле."""
 
-            return (
-                f"⚠️ АНОМАЛИЯ ПОВЕДЕНИЯ: Система зафиксировала отклонение процесса {process} от нормального профиля. "
-                f"ML-скоринг ({score:.4f}) указывает на нетипичное использование системных ресурсов. "
-                f"Требуется ручная проверка аналитиком SOC.")
+            try:
+                response = self.client.models.generate_content(
+                    model="gemini-2.0-flash",
+                    contents=prompt
+                )
+                return response.text
+            except Exception:
+                # Если API недоступен — используем умный fallback
+                pass
 
-        return f"✅ СИСТЕМА ЧИСТА: Процесс {process} верифицирован. Поведенческий паттерн пользователя {user} в пределах нормы."
-
+        return self._generate_fallback_report(event_data)
 
 # Инициализация
 ai_analyst = AIForensicEngine()

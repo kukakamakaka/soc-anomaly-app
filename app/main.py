@@ -1,32 +1,52 @@
-from fastapi import FastAPI, Depends, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, Security
+from fastapi.security.api_key import APIKeyHeader
 from app.ai_engine import ai_analyst
 from sqlalchemy.orm import Session
 from app.database import SessionLocal, engine
 from app import models, schemas
 from app.anomaly_detector import AnomalyDetector
+from mitre_mapper import MitreMapper
 import subprocess
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+API_KEY = "soc_diploma_secret_2026"
+api_key_header = APIKeyHeader(name="X-API-Key", auto_error=False)
+
+async def verify_api_key(api_key: str = Security(api_key_header)):
+    if api_key != API_KEY:
+        raise HTTPException(status_code=403, detail="Invalid API Key. Access Denied.")
+    return api_key
 
 # Создаем таблицы в PostgreSQL (в Докере)
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="SOC Anomaly Detection")
 
+@app.on_event("startup")
+def startup_event():
+    db = SessionLocal()
+    try:
+        train_model_on_existing_data(db)
+    finally:
+        db.close()
+
 from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"], # Адрес твоего фронтенда
-    allow_credentials=True,
+    allow_origins=["*"],  # Разрешаем все источники для локальной разработки
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-# Инициализируем детектор при старте
+# Инициализируем компоненты
 detector = AnomalyDetector()
+mitre_mapper = MitreMapper()
 
-
-# 1. Функция подключения к БД (теперь она определена!)
 def get_db():
     db = SessionLocal()
     try:
@@ -34,37 +54,40 @@ def get_db():
     finally:
         db.close()
 
-
-# 2. Функция обучения (чтобы модель знала, что такое "норма")
 def train_model_on_existing_data(db: Session):
     all_events = db.query(models.Event).all()
-    if len(all_events) >= 5:  # Обучаем, если есть хотя бы 5 записей
+    if len(all_events) >= 5:
         events_list = [
             {"process_name": e.process_name, "command_line": e.command_line, "user": e.user}
             for e in all_events
         ]
         detector.train(events_list)
 
+@app.post("/train")
+def trigger_training(api_key: str = Depends(verify_api_key), db: Session = Depends(get_db)):
+    train_model_on_existing_data(db)
+    return {"status": "success", "message": "Модель IsolationForest успешно переобучена"}
 
 @app.post("/ingest", response_model=schemas.EventOut)
-def ingest_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
-    train_model_on_existing_data(db)
+def ingest_event(event: schemas.EventCreate, api_key: str = Depends(verify_api_key), db: Session = Depends(get_db)):
+    # 1. ML Scoring
     score = detector.score(event.dict())
 
-    # ПРОВЕРКА MITRE (Твоя логика!)
-    mitre_info = analyze_with_mitre(event.command_line)
+    # 2. MITRE Mapping
+    techniques = mitre_mapper.get_attack_info(event.command_line)
+    mitre_text = mitre_mapper.format_techniques(techniques) if techniques else None
 
-    # Гибридная логика определения серьезности
+    # 3. Hybrid Severity Logic
     severity = "normal"
-    if score < -0.05: severity = "low"
-    if score < -0.15 or mitre_info: severity = "high" # Если есть техника MITRE - сразу HIGH
-    if score < -0.25 and mitre_info: severity = "critical"
+    if score >= 0.5: severity = "low"
+    if score >= 0.75 or techniques: severity = "high"
+    if score >= 0.9 and techniques: severity = "critical"
 
     db_event = models.Event(
         **event.dict(),
         anomaly_score=score,
         severity=severity,
-        mitre_technique=mitre_info # Сохраняем результат анализа
+        mitre_technique=mitre_text
     )
     db.add(db_event)
     db.commit()
@@ -72,62 +95,13 @@ def ingest_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
     return db_event
 
 @app.get("/events", response_model=list[schemas.EventOut])
-def get_events(db: Session = Depends(get_db)):
-    return db.query(models.Event).all()
-
-# Если severity "high" или "critical", вызываем этот метод
-def generate_ai_report(event_details: str):
-    # Здесь будет вызов OpenAI API или LangChain
-    # "Проанализируй событие {event_details} и напиши краткий отчет для аналитика SOC"
-    pass
-
-# База знаний MITRE (для твоего резюме и диплома)
-MITRE_TECHNIQUES = {
-    "powershell": "T1059.001 (Command and Scripting Interpreter)",
-    "whoami": "T1033 (System Owner/User Discovery)",
-    "bitsadmin": "T1197 (BITS Jobs)",
-    "curl": "T1105 (Ingress Tool Transfer)",
-    "net user": "T1087 (Account Discovery)"
-}
-
-def analyze_with_mitre(command: str):
-    command = command.lower()
-    for trigger, technique in MITRE_TECHNIQUES.items():
-        if trigger in command:
-            return technique
-    return None
+def get_events(limit: int = 100, api_key: str = Depends(verify_api_key), db: Session = Depends(get_db)):
+    return db.query(models.Event).order_by(models.Event.id.desc()).limit(limit).all()
 
 
 @app.get("/events/{event_id}/report")
-def get_ai_report(event_id: int, db: Session = Depends(get_db)):
+def get_event_report(event_id: int, api_key: str = Depends(verify_api_key), db: Session = Depends(get_db)):
     event = db.query(models.Event).filter(models.Event.id == event_id).first()
-    if not event:
-        return {"error": "Event not found"}
-
-    # Логика "ИИ-аналитика"
-    # В реальном проекте здесь был бы вызов OpenAI API
-    prompt = f"Проанализируй команду: {event.command_line}. Процесс: {event.process_name}."
-
-    if "powershell" in event.command_line.lower():
-        report = (
-            "⚠️ **Анализ ИИ:** Обнаружена попытка запуска скрытого скрипта PowerShell. "
-            "Использование `-EncodedCommand` часто указывает на попытку обхода антивируса (EDR). "
-            "**Рекомендация:** Немедленно изолировать хост и проверить сетевые соединения."
-        )
-    elif "curl" in event.command_line.lower() or "wget" in event.command_line.lower():
-        report = (
-            "🌐 **Анализ ИИ:** Подозрительная загрузка внешнего файла. "
-            "Утилита пытается скачать объект с удаленного сервера. Это может быть загрузка бэкдора. "
-            "**Рекомендация:** Проверить репутацию IP-адреса источника."
-        )
-    else:
-        report = "✅ **Анализ ИИ:** Поведение соответствует стандартным операциям системы. Аномалий не выявлено."
-
-    return {"report": report}
-
-@app.get("/events/{event_id}/report")
-def get_event_report(event_id: int, db: Session = Depends(get_db)):
-    event = db.query(models.SOCEvent).filter(models.SOCEvent.id == event_id).first()
     if not event:
         raise HTTPException(status_code=404, detail="Event not found")
 
@@ -136,21 +110,17 @@ def get_event_report(event_id: int, db: Session = Depends(get_db)):
         "process_name": event.process_name,
         "command_line": event.command_line,
         "user": event.user,
-        "severity": event.severity
+        "severity": event.severity,
+        "anomaly_score": event.anomaly_score
     })
 
     return {"id": event_id, "report": report_text}
 
-
 @app.post("/simulate")
-async def run_simulation():
+async def run_simulation(api_key: str = Depends(verify_api_key)):
     try:
-        # Указываем путь к скрипту (убедись, что путь верный относительно main.py)
         script_path = os.path.join(os.path.dirname(__file__), "..", "generate_data.py")
-
-        # Запускаем скрипт в фоновом режиме
         subprocess.Popen(["python3", script_path])
-
         return {"status": "success", "message": "Симуляция атак запущена!"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Ошибка запуска: {str(e)}")
