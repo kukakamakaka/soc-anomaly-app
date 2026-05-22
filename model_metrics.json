@@ -1,0 +1,17 @@
+{
+  "accuracy": 100.0,
+  "precision": 100.0,
+  "recall": 100.0,
+  "f1_score": 100.0,
+  "fpr": 0.0,
+  "tp": 20,
+  "tn": 20,
+  "fp": 0,
+  "fn": 0,
+  "total_samples": 40,
+  "attack_samples": 20,
+  "normal_samples": 20,
+  "threshold": 0.12,
+  "algorithm": "Isolation Forest",
+  "features": 25
+}

@@ -1,20 +1,20 @@
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
+import os
 
-# 1. Меняем URL: вместо sqlite используем postgresql
-# Формат: postgresql://логин:пароль@хост:порт/название_базы
-SQLALCHEMY_DATABASE_URL = "postgresql://user:password@127.0.0.1:5433/soc_db"
+# SQLite — встроенная база, не требует сервера
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+SQLALCHEMY_DATABASE_URL = f"sqlite:///{os.path.join(BASE_DIR, 'soc.db')}"
 
-# 2. Создаем движок (engine).
-# Для Postgres параметр check_same_thread не нужен (это только фишка SQLite)
-engine = create_engine(SQLALCHEMY_DATABASE_URL)
+engine = create_engine(
+    SQLALCHEMY_DATABASE_URL,
+    connect_args={"check_same_thread": False},  # нужно только для SQLite
+)
 
-# 3. Настраиваем сессии
 SessionLocal = sessionmaker(
     autocommit=False,
     autoflush=False,
-    bind=engine
+    bind=engine,
 )
 
-# 4. Базовый класс для моделей
 Base = declarative_base()
