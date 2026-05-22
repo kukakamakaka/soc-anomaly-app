@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Preloader from "@/components/Preloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -13,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SentinelCore — SOC Anomaly Detection",
-  description: "Real-time ML-powered security monitoring dashboard",
+  title: "SentinelCore — AI-Powered SOC Platform",
+  description: "Real-time ML anomaly detection with Isolation Forest and MITRE ATT&CK framework",
 };
 
 export default function RootLayout({
@@ -24,9 +25,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Preloader />
         {children}
       </body>
     </html>

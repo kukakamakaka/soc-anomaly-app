@@ -8,13 +8,13 @@
 }
 
 :root {
-  --background: #020617;
-  --foreground: #f8fafc;
+  --background: #010b18;
+  --foreground: #f1f5f9;
   --accent-blue: #3b82f6;
   --accent-indigo: #6366f1;
   --accent-cyan: #06b6d4;
-  --card-bg: rgba(15, 23, 42, 0.6);
-  --card-border: rgba(30, 41, 59, 0.5);
+  --card-bg: rgba(10, 20, 38, 0.75);
+  --card-border: rgba(30, 50, 80, 0.5);
 }
 
 body {
@@ -22,124 +22,147 @@ body {
   color: var(--foreground);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Background Effects */
+/* ── Fine dot-grid background ── */
 .bg-grid {
-  background-image: linear-gradient(rgba(59, 130, 246, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image:
+    radial-gradient(circle, rgba(59, 130, 246, 0.12) 1px, transparent 1px);
+  background-size: 28px 28px;
 }
 
-/* Scanlines removed — was causing constant repaint on scroll */
-
-/* Custom Scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-}
-
-::-webkit-scrollbar-track {
-  background: rgba(15, 23, 42, 0.5);
-}
-
+/* ── Custom Scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: rgba(10, 20, 38, 0.5); }
 ::-webkit-scrollbar-thumb {
-  background: rgba(59, 130, 246, 0.3);
+  background: rgba(59, 130, 246, 0.25);
   border-radius: 10px;
 }
+::-webkit-scrollbar-thumb:hover { background: rgba(59, 130, 246, 0.45); }
 
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(59, 130, 246, 0.5);
+/* ── Premium Glassmorphism ── */
+.glass {
+  background: rgba(10, 20, 38, 0.78);
+  border: 1px solid rgba(40, 65, 100, 0.55);
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.5),
+    0 20px 60px -10px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
 }
 
-/* Glassmorphism Utilities — backdrop-filter removed (GPU killer with many elements) */
-.glass {
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(30, 41, 59, 0.6);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.4);
+.glass-elevated {
+  background: rgba(14, 26, 50, 0.85);
+  border: 1px solid rgba(59, 130, 246, 0.18);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(59, 130, 246, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .glass-hover {
-  transition: all 0.3s ease;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
-
 .glass-hover:hover {
-  border-color: rgba(59, 130, 246, 0.4);
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.1);
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(59, 130, 246, 0.08);
 }
 
-/* Animations */
+/* ── Premium table rows ── */
+.table-row-premium {
+  transition: background 0.15s ease, border-left-color 0.15s ease;
+}
+.table-row-premium:hover {
+  background: rgba(59, 130, 246, 0.04);
+}
+
+/* ── Animations ── */
 @keyframes shimmer {
-  0% { transform: translateX(-100%); }
+  0%   { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
-
-.animate-shimmer {
-  animation: shimmer 2s infinite;
-}
+.animate-shimmer { animation: shimmer 2s infinite; }
 
 @keyframes pulse-slow {
-  0%, 100% { opacity: 0.3; }
-  50% { opacity: 0.6; }
+  0%, 100% { opacity: 0.25; }
+  50%       { opacity: 0.55; }
 }
-
-.animate-pulse-slow {
-  animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-}
+.animate-pulse-slow { animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
 
 @keyframes spin-slow {
   from { transform: rotate(0deg); }
   to   { transform: rotate(360deg); }
 }
-
 .spin-slow {
   animation: spin-slow 20s linear infinite;
   will-change: transform;
 }
 
-/* Neon Text */
-.text-neon-blue {
-  text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
+.animate-fade-in-up { animation: fade-in-up 0.45s ease forwards; }
 
-.text-neon-red {
-  text-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
-}
+/* ── Neon text glows ── */
+.text-neon-blue  { text-shadow: 0 0 14px rgba(59,  130, 246, 0.55); }
+.text-neon-red   { text-shadow: 0 0 14px rgba(239,  68,  68, 0.55); }
+.text-neon-green { text-shadow: 0 0 14px rgba(52,  211, 153, 0.55); }
 
-/* ── Performance: CSS-only glow orbs (GPU-composited, no JS) ── */
+/* ── Background glow orbs ── */
 @keyframes glow-drift-1 {
-  0%,100% { transform: translate(0, 0) scale(1);   opacity: 0.10; }
-  50%      { transform: translate(50px, 30px) scale(1.15); opacity: 0.20; }
+  0%, 100% { transform: translate(0, 0) scale(1);      opacity: 0.12; }
+  50%       { transform: translate(60px, 40px) scale(1.18); opacity: 0.22; }
 }
-
 @keyframes glow-drift-2 {
-  0%,100% { transform: translate(0, 0) scale(1);   opacity: 0.08; }
-  50%      { transform: translate(-40px, -20px) scale(1.1); opacity: 0.16; }
+  0%, 100% { transform: translate(0, 0) scale(1);       opacity: 0.09; }
+  50%       { transform: translate(-50px, -30px) scale(1.12); opacity: 0.18; }
+}
+@keyframes glow-drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1);       opacity: 0.06; }
+  50%       { transform: translate(30px, -50px) scale(1.08); opacity: 0.13; }
 }
 
 .glow-orb-1 {
-  position: fixed;
-  top: -20%;
-  left: -10%;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(circle, rgba(59,130,246,0.15) 0%, transparent 70%);
-  border-radius: 50%;
-  z-index: -1;
-  pointer-events: none;
+  position: fixed; top: -25%; left: -12%;
+  width: 90%; height: 90%;
+  background: radial-gradient(circle, rgba(59,130,246,0.18) 0%, transparent 68%);
+  border-radius: 50%; z-index: -1; pointer-events: none;
   will-change: transform, opacity;
-  animation: glow-drift-1 15s ease-in-out infinite;
+  animation: glow-drift-1 16s ease-in-out infinite;
+}
+.glow-orb-2 {
+  position: fixed; bottom: -22%; right: -12%;
+  width: 75%; height: 75%;
+  background: radial-gradient(circle, rgba(99,102,241,0.14) 0%, transparent 68%);
+  border-radius: 50%; z-index: -1; pointer-events: none;
+  will-change: transform, opacity;
+  animation: glow-drift-2 13s ease-in-out infinite 2s;
+}
+.glow-orb-3 {
+  position: fixed; top: 40%; left: 40%;
+  width: 50%; height: 50%;
+  background: radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 68%);
+  border-radius: 50%; z-index: -1; pointer-events: none;
+  will-change: transform, opacity;
+  animation: glow-drift-3 20s ease-in-out infinite 5s;
 }
 
-.glow-orb-2 {
-  position: fixed;
-  bottom: -20%;
-  right: -10%;
-  width: 80%;
-  height: 80%;
-  background: radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%);
-  border-radius: 50%;
-  z-index: -1;
-  pointer-events: none;
-  will-change: transform, opacity;
-  animation: glow-drift-2 12s ease-in-out infinite 2s;
+/* ── Premium stat card glow on hover ── */
+.stat-card-glow-blue:hover   { box-shadow: 0 0 40px rgba(59,  130, 246, 0.12), 0 20px 60px rgba(0,0,0,0.5); }
+.stat-card-glow-red:hover    { box-shadow: 0 0 40px rgba(239,  68,  68, 0.12), 0 20px 60px rgba(0,0,0,0.5); }
+.stat-card-glow-orange:hover { box-shadow: 0 0 40px rgba(249, 115,  22, 0.12), 0 20px 60px rgba(0,0,0,0.5); }
+.stat-card-glow-purple:hover { box-shadow: 0 0 40px rgba(139,  92, 246, 0.12), 0 20px 60px rgba(0,0,0,0.5); }
+
+/* ── Severity badge pulse ring for critical ── */
+.badge-critical { position: relative; }
+.badge-critical::before {
+  content: '';
+  position: absolute; inset: -3px;
+  border-radius: 9999px;
+  background: rgba(239, 68, 68, 0.15);
+  animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
 }
